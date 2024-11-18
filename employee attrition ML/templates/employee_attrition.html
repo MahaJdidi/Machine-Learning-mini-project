@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Attrition Prediction</title>
+</head>
+<body>
+    <h2>Employee Attrition Prediction</h2>
+    <form action="/predict" method="POST">
+        <label for="satisfaction_level">Satisfaction Level (0.0 to 1.0):</label><br>
+        <input type="text" id="satisfaction_level" name="satisfaction_level" required><br><br>
+        
+        <label for="average_monthly_hours">Average Monthly Hours:</label><br>
+        <input type="text" id="average_monthly_hours" name="average_monthly_hours" required><br><br>
+        
+        <input type="submit" value="Predict">
+    </form>
+    
+    {% if pred %}
+    <h3>Prediction:</h3>
+    <p>{{ pred }}</p>
+    <p>{{ advice }}</p>
+    {% endif %}
+</body>
+</html>
