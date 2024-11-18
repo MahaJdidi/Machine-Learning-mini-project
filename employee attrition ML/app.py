@@ -4,28 +4,28 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load the trained model (Make sure model.pkl is in the same directory as app.py)
+
 model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_template("employee_attrition.html")  # Make sure this template exists
+    return render_template("employee_attrition.html")  
 
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     try:
-        # Get the input values from the form (satisfaction_level, average_monthly_hours)
+        
         satisfaction_level = float(request.form['satisfaction_level'])
         average_monthly_hours = float(request.form['average_monthly_hours'])
 
-        # Create a NumPy array for the prediction
+        
         input_features = np.array([[satisfaction_level, average_monthly_hours]])
 
-        # Make the prediction
+        
         prediction = model.predict_proba(input_features)
         output = '{0:.{1}f}'.format(prediction[0][1], 2)  # Probability of attrition
 
-        # Interpret the result
+        
         if float(output) > 0.5:
             return render_template(
                 'employee_attrition.html',
